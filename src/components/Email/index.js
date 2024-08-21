@@ -1,11 +1,14 @@
-import React from "react";
+import EmailIcon from "@mui/icons-material/Email";
+import InputAdornment from "@mui/material/InputAdornment";
+import TextField from "@mui/material/TextField";
 import PropTypes from "prop-types";
+import React from "react";
 import { useFormContext } from "react-hook-form";
+import { useSettings } from "../../providers/SettingsContext";
 import getFieldError from "../../utils/getFieldError";
 import { valueToLowerCase } from "../../utils/helpers";
+import { ConditionalWrapper, SubLabelWrapper } from "../General";
 import InputWrapper from "../InputWrapper";
-import { Input, ConditionalWrapper, SubLabelWrapper } from "../General";
-import { useSettings } from "../../providers/SettingsContext";
 
 const Email = ({ fieldData, name, labelFor, ...wrapProps }) => {
   const {
@@ -48,10 +51,13 @@ const Email = ({ fieldData, name, labelFor, ...wrapProps }) => {
           </SubLabelWrapper>
         )}
       >
-        <Input
-          name={name}
+        <TextField
+          fullWidth
+          fieldData={{ ...fieldData }}
+          type="email"
           errors={errors}
-          fieldData={{ ...fieldData, type: "email" }}
+          name={name}
+          label={fieldData.placeholder}
           className={valueToLowerCase(size)}
           {...register(name, {
             required: isRequired && (errorMessage || strings.errors.required),
@@ -67,8 +73,13 @@ const Email = ({ fieldData, name, labelFor, ...wrapProps }) => {
               ),
             },
           })}
-          labelFor={labelFor}
-          placeholder={emailField?.placeholder || placeholder}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <EmailIcon />
+              </InputAdornment>
+            ),
+          }}
         />
       </ConditionalWrapper>
 
@@ -81,11 +92,13 @@ const Email = ({ fieldData, name, labelFor, ...wrapProps }) => {
           name={`${name}_2`}
           labelFor={`${labelFor}_2`}
         >
-          <Input
-            name={`${name}_2`}
+          <TextField
+            fullWidth
+            fieldData={{ ...fieldData }}
+            type="email"
             errors={errors}
-            fieldData={{ ...fieldData, type: "email" }}
-            labelFor={`${labelFor}_2`}
+            name={`${name}_2`}
+            label={confirmEmailField?.placeholder || placeholder}
             {...register(`${name}_2`, {
               required: isRequired && strings.errors.required,
               validate: (val) => {
@@ -94,7 +107,13 @@ const Email = ({ fieldData, name, labelFor, ...wrapProps }) => {
                 }
               },
             })}
-            placeholder={confirmEmailField?.placeholder || placeholder}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <EmailIcon />
+                </InputAdornment>
+              ),
+            }}
           />
         </SubLabelWrapper>
       )}
