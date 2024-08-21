@@ -7,6 +7,11 @@ import { valueToLowerCase } from "../../utils/helpers";
 import { useSettings } from "../../providers/SettingsContext";
 import SelectDeselectButton from "./SelectDeselectButton";
 import OtherChoice from "./OtherChoice";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+import FormGroup from "@mui/material/FormGroup";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
 
 const SelectorList = ({ fieldData, name, labelFor, ...wrapProps }) => {
   const { strings, databaseId } = useSettings();
@@ -38,40 +43,79 @@ const SelectorList = ({ fieldData, name, labelFor, ...wrapProps }) => {
       {...wrapProps}
     >
       <div className={`gfield_${type}`} id={`input_${databaseId}_${id}`}>
-        {choices.map(({ text, value }, index) => {
-          const choiceID = type === "checkbox" ? index + 1 : index;
-          return (
-            <div
-              className={classnames(
-                "gchoice",
-                `gchoice_${databaseId}_${id}_${choiceID}`
-              )}
-              key={`${name}-${index + 1}`}
-            >
-              <input
-                className={classnames(
-                  `gfield-choice-input`,
-                  cssClass,
-                  valueToLowerCase(size)
-                )}
-                id={`choice_${databaseId}_${id}_${choiceID}`}
-                name={`${name}${type === "checkbox" ? `.${choiceID}` : ""}`}
-                {...register(name, {
-                  required:
-                    isRequired && (errorMessage || strings.errors.required),
-                })}
-                type={type}
-                value={value}
-              />
-              &nbsp;
-              <label
-                className="gform-field-label gform-field-label--type-inline"
-                htmlFor={`choice_${databaseId}_${id}_${choiceID}`}
-                dangerouslySetInnerHTML={{ __html: text }}
-              />
-            </div>
-          );
-        })}
+        {type === "checkbox" ? (
+          <>
+            <FormGroup>
+              {choices.map(({ text, value }, index) => {
+                const choiceID = type === "checkbox" ? index + 1 : index;
+                return (
+                  <div
+                    className={classnames(
+                      "gchoice",
+                      `gchoice_${databaseId}_${id}_${choiceID}`
+                    )}
+                    key={`${name}-${index + 1}`}
+                  >
+                    <FormControlLabel
+                      control={<Checkbox />}
+                      label={text}
+                      className={classnames(
+                        `gfield-choice-input`,
+                        cssClass,
+                        valueToLowerCase(size)
+                      )}
+                      id={`choice_${databaseId}_${id}_${choiceID}`}
+                      name={`${name}${
+                        type === "checkbox" ? `.${choiceID}` : ""
+                      }`}
+                      {...register(name, {
+                        required:
+                          isRequired &&
+                          (errorMessage || strings.errors.required),
+                      })}
+                      type={type}
+                      value={value}
+                    />
+                  </div>
+                );
+              })}
+            </FormGroup>
+          </>
+        ) : (
+          <RadioGroup defaultValue="female">
+            {choices.map(({ text, value }, index) => {
+              const choiceID = type === "checkbox" ? index + 1 : index;
+              return (
+                <div
+                  className={classnames(
+                    "gchoice",
+                    `gchoice_${databaseId}_${id}_${choiceID}`
+                  )}
+                  key={`${name}-${index + 1}`}
+                >
+                  <FormControlLabel
+                    control={<Radio />}
+                    label={text}
+                    className={classnames(
+                      `gfield-choice-input`,
+                      cssClass,
+                      valueToLowerCase(size)
+                    )}
+                    id={`choice_${databaseId}_${id}_${choiceID}`}
+                    name={`${name}${type === "checkbox" ? `.${choiceID}` : ""}`}
+                    {...register(name, {
+                      required:
+                        isRequired && (errorMessage || strings.errors.required),
+                    })}
+                    type={type}
+                    value={value}
+                  />
+                </div>
+              );
+            })}
+          </RadioGroup>
+        )}
+
         {hasOtherChoice && (
           <OtherChoice
             strings={strings}
