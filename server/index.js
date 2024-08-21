@@ -1,2 +1,2 @@
-export{g as getGravityForm}from"./index-DI3GzoQT.js";export{gravityFormQuery,submitMutationQuery}from"./query.js";import"node:http";import"node:https";import"node:zlib";import"node:stream";import"node:buffer";import"node:util";import"node:url";import"node:net";import"node:fs";import"node:path";
+"use strict";var e=require("./index-CDLIyi9e.js"),r=require("./query.js");require("node:http"),require("node:https"),require("node:zlib"),require("node:stream"),require("node:buffer"),require("node:util"),require("node:url"),require("node:net"),require("node:fs"),require("node:path"),exports.getGravityForm=e.getGravityForm,exports.gravityFormQuery=r.gravityFormQuery,exports.submitMutationQuery=r.submitMutationQuery;
 //# sourceMappingURL=index.js.map
