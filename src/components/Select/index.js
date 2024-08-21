@@ -6,6 +6,11 @@ import InputWrapper from "../../components/InputWrapper";
 import MultiSelectEnhancedUI from "./MultiSelectEnhancedUI";
 import { valueToLowerCase } from "../../utils/helpers";
 import { useSettings } from "../../providers/SettingsContext";
+import { Select as MuiSelect } from "@mui/material";
+import MenuItem from "@mui/material/MenuItem";
+import { useState } from "react";
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
 
 export const getSelectDefaultValue = ({
   defaultValue,
@@ -56,6 +61,12 @@ const Select = ({ fieldData, name, labelFor, ...wrapProps }) => {
     formState: { errors },
   } = useFormContext();
 
+  const [value, setValue] = useState("");
+
+  const handleChange = (event) => {
+    setValue(event.target.value);
+  };
+
   return (
     <InputWrapper
       errors={errors?.[name] || {}}
@@ -63,45 +74,56 @@ const Select = ({ fieldData, name, labelFor, ...wrapProps }) => {
       labelFor={labelFor}
       {...wrapProps}
     >
-      {hasEnhancedUI ? (
-        <MultiSelectEnhancedUI
-          name={name}
-          options={options}
-          cssClass={cssClass}
-          id={labelFor}
-          isRequired={isRequired}
-          size={valueToLowerCase(size)}
-          control={control}
-          isMulti={isMultiselectField}
-        />
-      ) : (
-        <select
-          multiple={isMultiselectField}
-          aria-invalid={!!errors?.[name]}
-          aria-required={isRequired}
-          className={classnames(
-            "gfield_select",
-            cssClass,
-            valueToLowerCase(size)
-          )}
-          id={labelFor}
-          name={name}
-          {...register(name, {
-            required: isRequired && (errorMessage || strings.errors.required),
-          })}
-        >
-          {options.map(({ text, value, className }, index) => {
-            return (
-              <option
-                key={`${name}-${index}`}
-                value={value}
-                className={className}
-                dangerouslySetInnerHTML={{ __html: text }}
-              />
-            );
-          })}
-        </select>
-      )}
+      <FormControl fullWidth>
+        {hasEnhancedUI ? (
+          <MultiSelectEnhancedUI
+            name={name}
+            options={options}
+            cssClass={cssClass}
+            id={labelFor}
+            isRequired={isRequired}
+            size={valueToLowerCase(size)}
+            control={control}
+            isMulti={isMultiselectField}
+          />
+        ) : (
+          <>
+            <InputLabel>{placeholder}</InputLabel>
+
+            <MuiSelect
+              onChange={handleChange}
+              defaultValue={value}
+              label={placeholder}
+              multiple={isMultiselectField}
+              aria-invalid={!!errors?.[name]}
+              aria-required={isRequired}
+              className={classnames(
+                "gfield_select",
+                cssClass,
+                valueToLowerCase(size)
+              )}
+              id={labelFor}
+              name={name}
+              {...register(name, {
+                required:
+                  isRequired && (errorMessage || strings.errors.required),
+              })}
+            >
+              {options.map(({ text, value, className }, index) => {
+                return (
+                  <MenuItem
+                    key={`${name}-${index}`}
+                    value={value}
+                    className={className}
+                  >
+                    {text}
+                  </MenuItem>
+                );
+              })}
+            </MuiSelect>
+          </>
+        )}
+      </FormControl>
     </InputWrapper>
   );
 };
