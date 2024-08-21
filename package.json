@@ -9,6 +9,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rollup -c rollup.config.form.mjs && rollup -c rollup.config.server.mjs",
     "npm:publish": "npm run build && npm publish ./dist --access public",
+    "prepare": "npm run build",
     "lint": "eslint src/**"
   },
   "keywords": [
