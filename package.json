@@ -26,6 +26,10 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
+    "@mui/icons-material": "^5.16.7",
+    "@mui/material": "^5.16.7",
     "@react-input/mask": "^1.2.5",
     "classnames": "^2.3.1",
     "mime-types": "^2.1.35",
