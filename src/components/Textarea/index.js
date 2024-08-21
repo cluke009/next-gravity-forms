@@ -1,11 +1,12 @@
+import TextField from "@mui/material/TextField";
 import classnames from "classnames";
 import PropTypes from "prop-types";
 import React from "react";
 import { useFormContext } from "react-hook-form";
 import InputWrapper from "../../components/InputWrapper";
-import { valueToLowerCase } from "../../utils/helpers";
-import getFieldError from "../../utils/getFieldError";
 import { useSettings } from "../../providers/SettingsContext";
+import getFieldError from "../../utils/getFieldError";
+import { valueToLowerCase } from "../../utils/helpers";
 
 const Textarea = ({ fieldData, name, labelFor, wrapClassName, wrapId }) => {
   const { strings } = useSettings();
@@ -37,14 +38,17 @@ const Textarea = ({ fieldData, name, labelFor, wrapClassName, wrapId }) => {
       wrapClassName={wrapClassName}
       wrapId={wrapId}
     >
-      <textarea
+      <TextField
+        fullWidth
+        multiline
+        rows={4}
+        label={placeholder}
         aria-invalid={Boolean(errors?.[name])}
         aria-required={isRequired}
         className={classnames(cssClass, valueToLowerCase(size), "textarea")}
         id={labelFor}
         maxLength={maxLength > 0 ? maxLength : undefined}
         name={name}
-        placeholder={placeholder}
         {...register(name, {
           required: isRequired && (errorMessage || strings.errors.required),
           maxLength: maxLength > 0 && {
