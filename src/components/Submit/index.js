@@ -25,6 +25,7 @@ const SubmitButton = () => {
 
   return (
     <Button
+      size="large"
       variant="contained"
       className="gravityform__button gform_button button"
       id={`gform_submit_button_${databaseId}`}
