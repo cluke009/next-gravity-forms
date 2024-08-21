@@ -1,12 +1,12 @@
-import React from "react";
-import PropTypes from "prop-types";
+import TextField from "@mui/material/TextField";
 import classnames from "classnames";
+import PropTypes from "prop-types";
+import React from "react";
 import { useFormContext } from "react-hook-form";
-import { valueToLowerCase } from "../../utils/helpers";
-import getFieldError from "../../utils/getFieldError";
-import InputWrapper from "../InputWrapper";
-import { Input } from "../General";
 import { useSettings } from "../../providers/SettingsContext";
+import getFieldError from "../../utils/getFieldError";
+import { valueToLowerCase } from "../../utils/helpers";
+import InputWrapper from "../InputWrapper";
 
 const standardType = (type) => {
   switch (type) {
@@ -39,14 +39,15 @@ const InputField = ({ fieldData, name, labelFor, ...wrapProps }) => {
       labelFor={labelFor}
       {...wrapProps}
     >
-      <Input
+      <TextField
+        fullWidth
         fieldData={{ ...fieldData, type: valueToLowerCase(inputType) }}
         className={classnames(valueToLowerCase(size), {
           gform_hidden: type === "HIDDEN",
         })}
         errors={errors}
         name={name}
-        labelFor={labelFor}
+        label={fieldData.placeholder}
         {...register(name, {
           required: isRequired && (errorMessage || strings.errors.required),
           maxLength: maxLength > 0 && {
