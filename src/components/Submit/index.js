@@ -2,6 +2,7 @@ import React from "react";
 import { useSettings } from "../../providers/SettingsContext";
 import { useFormContext } from "react-hook-form";
 import { checkConditionalRendering } from "../InputWrapper/helpers";
+import { Button } from "@mui/material";
 
 const SubmitButton = () => {
   const {
@@ -23,7 +24,8 @@ const SubmitButton = () => {
   );
 
   return (
-    <button
+    <Button
+      variant="contained"
       className="gravityform__button gform_button button"
       id={`gform_submit_button_${databaseId}`}
       type="submit"
@@ -37,7 +39,7 @@ const SubmitButton = () => {
       ) : (
         text || strings.submit
       )}
-    </button>
+    </Button>
   );
 };
 
