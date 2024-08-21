@@ -4,8 +4,29 @@ import PropTypes from "prop-types";
 import strings from "../utils/strings";
 import fieldsSettings from "../utils/fieldsSettings";
 import mergeDeep from "../utils/mergeDeep";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 const SettingsContext = createContext();
+
+const theme = createTheme({
+  palette: {
+    mode: "light",
+    primary: {
+      light: "#9BB8D3",
+      main: "#02465F",
+      dark: "#1B365D",
+    },
+    secondary: {
+      main: "#2E1A47",
+      light: "#A57FB2",
+    },
+    success: {
+      main: "#205C40",
+      light: "#6FA287",
+      dark: "#244C5A",
+    },
+  },
+});
 
 export const getSettings = (helperFieldsSettings) => {
   return mergeDeep(fieldsSettings, helperFieldsSettings);
@@ -32,7 +53,7 @@ export const SettingsProvider = ({
         ...props,
       }}
     >
-      {children}
+      <ThemeProvider theme={theme}>{children}</ThemeProvider>
     </SettingsContext.Provider>
   );
 };
