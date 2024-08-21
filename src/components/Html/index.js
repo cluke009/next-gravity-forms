@@ -10,7 +10,6 @@ const Html = ({ fieldData, labelFor, wrapClassName, ...wrapProps }) => {
     <InputWrapper
       {...wrapProps}
       inputData={fieldData}
-      labelFor={labelFor}
       wrapClassName={classnames(
         wrapClassName,
         "gfield_html",
