@@ -5,6 +5,7 @@ import { array, bool, func, number, object, string } from "prop-types";
 import useResetPage from "./useResetPage";
 import { useFormContext } from "react-hook-form";
 import { checkConditionalRendering } from "../../../components/InputWrapper/helpers";
+import Button from "@mui/material/Button";
 
 const getClasses = (labelPlacement) => {
   switch (labelPlacement) {
@@ -81,28 +82,32 @@ const PageNav = ({
       className={classNames("gform_page_footer", getClasses(labelPlacement))}
     >
       {currentPage !== 1 && (
-        <input
+        <Button
+          variant="outlined"
           type="button"
           id={`gform_previous_button_${databaseId}${prevBtnId}`}
           className="gform_prev_button gform-theme-button button"
-          value={previousBtn?.text || "Previous"}
           onClick={handlePrevPage}
           style={isPrevBtmHidden ? { display: "none" } : undefined}
           disabled={isPrevBtmHidden ? "disabled" : undefined}
-        />
+        >
+          {previousBtn?.text || "Previous"}
+        </Button>
       )}
       {isLastPage ? (
         <SubmitButton />
       ) : (
-        <input
+        <Button
+          variant="outlined"
           type="button"
           id={`gform_next_button_${databaseId}_${id}`}
           className="gform_next_button gform-theme-button button"
-          value={nextButton?.text || "Next"}
           onClick={handleNextPage}
           style={isNextBtmHidden ? { display: "none" } : undefined}
           disabled={isNextBtmHidden ? "disabled" : undefined}
-        />
+        >
+          {nextButton?.text || "Next"}
+        </Button>
       )}
     </div>
   );
