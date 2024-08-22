@@ -3,6 +3,7 @@ import { interpolateString, valueToLowerCase } from "../../../utils/helpers";
 import { useSettings } from "../../../providers/SettingsContext";
 import classNames from "classnames";
 import { array, bool, number, string } from "prop-types";
+import LinearProgress from "@mui/material/LinearProgress";
 
 const renderInterpolatedHtml = (template, values) => {
   const interpolatedString = interpolateString(template, values);
@@ -75,15 +76,7 @@ const Percentage = ({
         )}
         aria-hidden="true"
       >
-        <div
-          className={classNames(
-            "gf_progressbar_percentage",
-            style && `percentbar_${valueToLowerCase(style)}`
-          )}
-          style={{ width: `${progress}%` }}
-        >
-          <span>{`${progress}%`}</span>
-        </div>
+        <LinearProgress variant="determinate" value={progress} />
       </div>
     </div>
   );
