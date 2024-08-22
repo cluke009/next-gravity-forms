@@ -7,6 +7,7 @@ import InputWrapper from "../InputWrapper";
 import { Input } from "../General";
 import { useSettings } from "../../providers/SettingsContext";
 import { formatValue, getRangeUtilities } from "./helpers";
+import TextField from "@mui/material/TextField";
 
 const NumberField = ({ fieldData, name, labelFor, ...wrapProps }) => {
   const {
@@ -48,7 +49,9 @@ const NumberField = ({ fieldData, name, labelFor, ...wrapProps }) => {
       labelFor={labelFor}
       {...wrapProps}
     >
-      <Input
+      <TextField
+        fullWidth
+        type="number"
         fieldData={{
           ...fieldData,
           type: format === "decimal_dot" ? "number" : "text",
