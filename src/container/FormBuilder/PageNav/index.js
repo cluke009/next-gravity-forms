@@ -84,6 +84,7 @@ const PageNav = ({
       {currentPage !== 1 && (
         <Button
           variant="outlined"
+          size="large"
           type="button"
           id={`gform_previous_button_${databaseId}${prevBtnId}`}
           className="gform_prev_button gform-theme-button button"
@@ -99,6 +100,7 @@ const PageNav = ({
       ) : (
         <Button
           variant="outlined"
+          size="large"
           type="button"
           id={`gform_next_button_${databaseId}_${id}`}
           className="gform_next_button gform-theme-button button"
