@@ -43,6 +43,7 @@ const Textarea = ({ fieldData, name, labelFor, wrapClassName, wrapId }) => {
         multiline
         rows={4}
         label={placeholder}
+        error={typeof errors?.[name] === "object" ? true : false}
         aria-invalid={Boolean(errors?.[name])}
         aria-required={isRequired}
         className={classnames(cssClass, valueToLowerCase(size), "textarea")}

@@ -55,7 +55,7 @@ const Email = ({ fieldData, name, labelFor, ...wrapProps }) => {
           fullWidth
           fieldData={{ ...fieldData }}
           type="email"
-          errors={errors}
+          error={typeof errors?.[name] === "object" ? true : false}
           name={name}
           label={fieldData.placeholder}
           className={valueToLowerCase(size)}
@@ -96,7 +96,7 @@ const Email = ({ fieldData, name, labelFor, ...wrapProps }) => {
             fullWidth
             fieldData={{ ...fieldData }}
             type="email"
-            errors={errors}
+            error={typeof errors?.[name] === "object" ? true : false}
             name={`${name}_2`}
             label={confirmEmailField?.placeholder || placeholder}
             {...register(`${name}_2`, {

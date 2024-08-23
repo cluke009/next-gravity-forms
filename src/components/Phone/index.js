@@ -46,7 +46,7 @@ const PhoneField = ({ fieldData, name, labelFor, ...wrapProps }) => {
             className={classnames(valueToLowerCase(size), {
               gform_hidden: type === "HIDDEN",
             })}
-            errors={errors}
+            error={typeof errors?.[name] === "object" ? true : false}
             name={name}
             defaultValue={value && isStandard ? format(value, mask) : value}
             label={fieldData.placeholder}

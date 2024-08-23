@@ -91,6 +91,7 @@ const Select = ({ fieldData, name, labelFor, ...wrapProps }) => {
             <InputLabel>{placeholder}</InputLabel>
 
             <MuiSelect
+              error={typeof errors?.[name] === "object" ? true : false}
               onChange={handleChange}
               defaultValue={value}
               label={placeholder}

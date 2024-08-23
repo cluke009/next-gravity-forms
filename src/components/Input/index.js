@@ -45,7 +45,7 @@ const InputField = ({ fieldData, name, labelFor, ...wrapProps }) => {
         className={classnames(valueToLowerCase(size), {
           gform_hidden: type === "HIDDEN",
         })}
-        errors={errors}
+        error={typeof errors?.[name] === "object" ? true : false}
         name={name}
         label={fieldData.placeholder}
         {...register(name, {
