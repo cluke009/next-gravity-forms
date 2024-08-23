@@ -1,2 +1,2 @@
-export{G as default}from"./index-DV2zEg09.esm.js";import"react";import"react-dom";import"path";
+export{G as default}from"./index-CJ0xV6HC.esm.js";import"react";import"react-dom";import"path";
 //# sourceMappingURL=index.esm.js.map
